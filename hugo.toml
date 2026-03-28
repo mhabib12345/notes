@@ -1,0 +1,36 @@
+baseURL = 'https://mhabib12345.srht.site/'
+languageCode = 'en-us'
+title = 'just a note'
+theme = 'syracuse'
+
+[params]
+math = true  # Enable MathJax globally
+
+[markup.goldmark.renderer]
+  unsafe = true  # Critical for MathJax
+
+
+[[menus.main]]
+name = 'home'
+pageRef = '/'
+weight = 10
+
+[[menus.main]]
+name = 'blog'
+pageRef = '/blog'
+weight = 20
+
+[[menus.main]]
+name = 'linux'
+pageRef = '/linux'
+weight = 30
+
+[[menus.main]]
+name = 'math'
+pageRef = '/math'
+weight = 40
+
+[module]
+  [[module.mounts]]
+    source = "docs"
+    target = "static/docs"

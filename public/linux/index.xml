@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on just a note</title><link>https://mhabib12345.srht.site/linux/</link><description>Recent content in Linux on just a note</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 26 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://mhabib12345.srht.site/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Basic KaTeX Math Guide</title><link>https://mhabib12345.srht.site/linux/basic-katex/</link><pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate><guid>https://mhabib12345.srht.site/linux/basic-katex/</guid><description>Basic KaTeX Math Guide Add math: true to your front matter to enable math.
+Inline Math Wrap with $:
+$E = mc^2$ $a^2 + b^2 = c^2$ $\frac{1}{2}$ Display Math Wrap with $$: $$ \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+Fractions $\frac{1}{2}$ inline
+$$ \frac{n!}{k!(n-k)!} $$
+Exponents $x^2$ and $x^{2n}$
+$$ e^{i\pi} + 1 = 0 $$
+Subscripts $x_1$ and $x_{ij}$
+$$ \sum_{i=1}^{n} i = \frac{n(n+1)}{2} $$
+Roots $\sqrt{x}$ and $\sqrt[3]{x}$</description></item><item><title>Setting up zram in Artix Linux</title><link>https://mhabib12345.srht.site/linux/zram/</link><pubDate>Thu, 03 Apr 2025 17:04:55 +0700</pubDate><guid>https://mhabib12345.srht.site/linux/zram/</guid><description>Here is the step for configuring zram in Artix Linux
+Create /etc/modules-load.d/zram.conf zram Create /etc/modprobe.d/zram.conf options zram num_devices=1 Create /etc/udev/rules.d/10-zram.rules bash ACTION==&amp;#34;add&amp;#34;, KERNEL==&amp;#34;zram0&amp;#34;, ATTR{initstate}==&amp;#34;0&amp;#34;, ATTR{comp_algorithm}=&amp;#34;zstd&amp;#34;, ATTR{disksize}=&amp;#34;4G&amp;#34;, RUN=&amp;#34;/usr/bin/mkswap -U clear %N&amp;#34; Finally, add zram to fstab for automount Edit /etc/fstab
+/dev/zram0 none swap defaults,discard,pri=100 0 0 Reboot to take the effect immediately
+After reboot, Check output with
+zramctl Voila!! Reference link : https://wiki.archlinux.org/title/ZRAM
+https://wiki.gentoo.org/wiki/Zram</description></item><item><title>My NixOS installation notes</title><link>https://mhabib12345.srht.site/linux/my-nixos-installation-notes/</link><pubDate>Wed, 02 Apr 2025 13:04:51 +0700</pubDate><guid>https://mhabib12345.srht.site/linux/my-nixos-installation-notes/</guid><description>Just some notes :D
+Lets go to the plan for the whole system structure :D
+Partition Filesystem Mountpoint Subvolume Compress (level) /dev/sda1 FAT32 /boot/efi - - /dev/sda2 btrfs / root, home zstd (1:5) Create root partition
+mkfs.btrfs /dev/sda2 Mount the root partition
+mount /dev/sda2 /mnt Create btrfs subvolume ( home and root)
+btrfs create subvolume /mnt/home btrfs create subvolume /mnt/root umount /mnt Create mountpoint and mount the partition respectively
+mkdir /mnt/boot mkdir /mnt/home mount -o compress=zstd,subvol=root /dev/sda2 /mnt mount -o compress=zstd,subvol=home /dev/sda2 /mnt/home mount /dev/sda1 /mnt/boot Generate the config and copy it to the root partition</description></item></channel></rss>

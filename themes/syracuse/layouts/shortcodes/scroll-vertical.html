@@ -1,0 +1,5 @@
+{{- $height := .Get "height" | default "400px" -}}
+{{- $class := .Get "class" | default "" -}}
+<div class="scroll-vertical {{ $class }}" style="max-height: {{ $height }}; overflow-y: auto; border: 1px solid #ddd; padding: 1rem; border-radius: 8px; background: #f9f9f9;">
+    {{ .Inner | markdownify }}
+</div>

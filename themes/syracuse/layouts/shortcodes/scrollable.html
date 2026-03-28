@@ -1,0 +1,28 @@
+{{- $height := .Get "height" -}}
+<style>
+.scrollable-container {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-width: 100%;
+    margin: 1rem 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    background: #f9f9f9;
+}
+.scrollable-container::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+.scrollable-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+.scrollable-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+</style>
+<div class="scrollable-container"{{ if $height }} style="max-height: {{ $height }};"{{ end }}>
+    {{ .Inner | markdownify }}
+</div>

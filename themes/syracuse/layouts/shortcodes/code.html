@@ -1,0 +1,158 @@
+<div class="code-container">
+  <div class="code-header">
+    <div class="file-info">
+      {{ if .Get "filename" }}
+        <span class="filename">{{ .Get "filename" }}</span>
+      {{ end }}
+      {{ if .Get "location" }}
+        <span class="file-location">{{ .Get "location" }}</span>
+      {{ end }}
+    </div>
+    <div class="header-right">
+      <span class="language-name">{{ with .Get "language" }}{{ . }}{{ else }}plaintext{{ end }}</span>
+      <button class="copy-button" onclick="copyCode(this)" title="Copy to clipboard" aria-label="Copy code">
+        <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
+          <path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"/>
+        </svg>
+        <svg class="check-icon" viewBox="0 0 24 24" width="18" height="18">
+          <path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="code-wrapper">
+    {{ highlight (trim .Inner "\n") (.Get "language") }}
+  </div>
+</div>
+
+<script>
+function copyCode(button) {
+  const codeBlock = button.closest('.code-container').querySelector('pre');
+  const range = document.createRange();
+  range.selectNode(codeBlock);
+  window.getSelection().removeAllRanges();
+  window.getSelection().addRange(range);
+  
+  try {
+    const successful = document.execCommand('copy');
+    if (successful) {
+      button.classList.add('copied');
+      setTimeout(() => {
+        button.classList.remove('copied');
+      }, 1500);
+    }
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+  
+  window.getSelection().removeAllRanges();
+}
+</script>
+
+<style>
+.code-container {
+  position: relative;
+  margin: 1rem 0;
+  border-radius: 6px;
+  background: var(--code-bg);
+  overflow: hidden;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.1);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.filename {
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.file-location {
+  opacity: 0.7;
+  font-size: 0.7em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.copy-button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.copy-icon, .check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease;
+}
+
+.check-icon {
+  opacity: 0;
+}
+
+.copy-button.copied .copy-icon {
+  opacity: 0;
+}
+
+.copy-button.copied .check-icon {
+  opacity: 1;
+}
+
+.code-wrapper {
+  overflow-x: auto;
+}
+
+.code-wrapper pre {
+  margin: 0;
+  padding: 1rem;
+  overflow: visible;
+}
+
+/* Optional scrollbar styling */
+.code-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.code-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+</style>

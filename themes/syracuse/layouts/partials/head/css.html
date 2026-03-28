@@ -1,0 +1,93 @@
+{{- /* Inline CSS as fallback */ -}}
+<style>
+/* Self-hosted JetBrains Mono - No Google Fonts dependency */
+/* jetbrains-mono-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* Apply to everything */
+body {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-left: 20%;
+  margin-right: 20%;
+  max-width: 60%;
+}
+
+/* For code blocks */
+code, pre, kbd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+
+header {
+  border-bottom: 1px solid #222;
+  margin-bottom: 1rem;
+}
+
+footer {
+  border-top: 1px solid #222;
+  margin-top: 1rem;
+}
+
+a {
+  color: #559107;
+  text-decoration: underline;
+  text-decoration-color: rgb(207, 205, 205);  /* Underline color */
+  text-decoration-thickness: 2px; /* Optional: thickness */
+}
+
+a:hover {
+  color: #559107;
+  text-decoration: underline;
+  text-decoration-color: #559107;  /* Underline color */
+  text-decoration-thickness: 2px; /* Optional: thickness */
+}
+
+.content img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 50%;
+  height: auto;
+}
+
+/* In your theme's CSS file */
+table {
+  width: 50%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  border: 1px solid #a71111;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ec6f08;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+:root {
+  --code-bg: #282c34;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+</style>
