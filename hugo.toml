@@ -1,4 +1,4 @@
-baseURL = 'https://mhabib12345.srht.site/'
+baseURL = "mhabib12345.github.io/notes"
 languageCode = 'en-us'
 title = 'just a note'
 theme = 'syracuse'
